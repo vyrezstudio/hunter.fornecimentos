@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hunter Fornecimentos 🍀 — Streamings baratos e comunidade top</title>
-  <meta name="description" content="Hunter Fornecimentos: streamings baratos (HBO, Disney, Crunchyroll e mais), vendas seguras e uma comunidade ativa no Discord. Entre agora e economize!" />
+  <title>Hunter Fornecimentos 🍀 — Streamings Baratos e Confiáveis</title>
+  <meta name="description" content="Comunidade no Discord com HBO, Disney, Crunchyroll, Netflix e muito mais por preços imbatíveis. Segurança total e economia real." />
  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
  
   <style>
     :root {
       --primary: #0F172A;
-      --accent: #22C55E;       /* Verde principal Hunter */
-      --accent-dark: #16A34A;
-      --success: #22C55E;
-      --surface: #F9FAFB;
+      --accent: #00FF41;
+      --accent-dark: #00CC33;
+      --surface: #FFFFFF;
+      --surface-light: #F9FAFB;
       --text: #1E293B;
       --text-light: #475569;
       --border: #E2E8F0;
       --radius: 20px;
       --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --shadow-glow: 0 0 40px rgba(0,255,65,0.25);
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -27,61 +29,78 @@
       background: var(--surface);
       color: var(--text);
       line-height: 1.7;
-      position: relative;
       overflow-x: hidden;
     }
-    /* Neve caindo lenta e sutil */
-    .snowflake {
+    /* Partículas de neve + clover animadas */
+    .particle {
       position: absolute;
-      top: -10px;
-      color: #d1d5db;
-      font-size: 1.2rem;
       pointer-events: none;
-      animation: fall linear infinite;
-      opacity: 0.7;
+      user-select: none;
+      animation: fall linear infinite, sway 6s ease-in-out infinite alternate;
     }
     @keyframes fall {
-      to { transform: translateY(110vh); }
+      to { transform: translateY(120vh); }
     }
-    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    @keyframes sway {
+      0% { transform: translateX(-15px) rotate(-10deg); }
+      100% { transform: translateX(15px) rotate(10deg); }
+    }
+    /* Animações gerais */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(0,255,65,0.2); }
+      50% { box-shadow: 0 0 60px rgba(0,255,65,0.5); }
+    }
+    .reveal { opacity: 0; transform: translateY(60px); transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
     /* Navbar */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: white;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
       z-index: 1000;
+      transition: all 0.4s;
     }
     .nav-inner {
       height: 80px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
-    .logo {
+    .logo-img {
+      max-height: 48px;
+      transition: transform 0.4s ease;
+    }
+    .logo-img:hover { transform: scale(1.08) rotate(3deg); }
+    .nav-links {
       display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--primary);
+      gap: 36px;
+      font-weight: 500;
     }
-    .logo-symbol {
-      width: 44px;
-      height: 44px;
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0; height: 2px;
+      bottom: -6px; left: 0;
       background: var(--accent);
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      color: white;
-      font-size: 26px;
-      font-weight: 900;
-      box-shadow: 0 0 20px rgba(34,197,94,0.3);
+      transition: width 0.4s ease;
     }
-    .nav-links { display: flex; gap: 36px; font-weight: 500; }
-    .nav-links a { color: var(--text-light); transition: color 0.3s; text-decoration: none; }
     .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { width: 100%; }
     .nav-cta {
       padding: 12px 32px;
       background: var(--accent);
@@ -89,81 +108,148 @@
       border-radius: 9999px;
       font-weight: 600;
       text-decoration: none;
-      box-shadow: 0 6px 20px rgba(34,197,94,0.25);
+      box-shadow: var(--shadow-glow);
+      animation: pulseGlow 3s infinite;
+      transition: all 0.3s;
+    }
+    .nav-cta:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 60px rgba(0,255,65,0.6);
+    }
+    .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--primary); }
+    @media (max-width: 968px) {
+      .nav-links { 
+        display: none; 
+        position: absolute;
+        top: 80px; left: 0; right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 30px 24px;
+        gap: 24px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transform: translateY(-20px);
+        opacity: 0;
+        transition: all 0.4s ease;
+      }
+      .nav-links.active {
+        display: flex;
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .menu-toggle { display: block; }
     }
     /* Hero */
     .hero {
-      padding: 160px 0 120px;
-      background: linear-gradient(135deg, #F0FDF4, #DCFCE7);
+      padding: 180px 0 140px;
       text-align: center;
+      background: linear-gradient(135deg, #f0fff0 0%, #e8ffe8 100%);
+      position: relative;
+      overflow: hidden;
     }
+    .hero-content { max-width: 900px; margin: 0 auto; }
     .hero h1 {
-      font-size: 4.2rem;
+      font-size: 4.5rem;
       margin-bottom: 24px;
       color: var(--primary);
+      line-height: 1.1;
     }
     .hero p {
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       color: var(--text-light);
+      margin-bottom: 48px;
       max-width: 720px;
-      margin: 0 auto 40px;
-    }
-    .btn {
-      padding: 16px 40px;
-      border-radius: 9999px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: all 0.3s;
-      display: inline-block;
-      text-decoration: none;
+      margin-left: auto;
+      margin-right: auto;
     }
     .btn-primary {
+      padding: 18px 48px;
       background: var(--accent);
       color: white;
-      box-shadow: 0 8px 30px rgba(34,197,94,0.3);
+      border: none;
+      border-radius: 9999px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-glow);
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+      pointer-events: none;
+    }
+    .btn-primary:active::before {
+      width: 300px; height: 300px;
     }
     .btn-primary:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 50px rgba(34,197,94,0.4);
-      background: var(--accent-dark);
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 0 80px rgba(0,255,65,0.7);
     }
-    /* Sections */
-    .section { padding: 100px 0; }
-    .section-header { text-align: center; margin-bottom: 70px; }
-    .section-header h2 { font-size: 3.2rem; color: var(--primary); }
+    /* Cards com flip hover */
     .card {
       background: white;
       border-radius: var(--radius);
       padding: 40px 32px;
       box-shadow: var(--shadow);
-      transition: all 0.4s;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
     }
     .card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+      transform: translateY(-16px) rotate(1deg);
+      box-shadow: 0 30px 70px rgba(0,255,65,0.25);
     }
-    /* Preços grid */
-    .precos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 32px;
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(0,255,65,0.08));
+      opacity: 0;
+      transition: opacity 0.5s;
     }
-    .preco-card {
-      text-align: center;
-    }
-    .preco-card h3 {
-      font-size: 2.2rem;
-      color: var(--accent);
+    .card:hover::before { opacity: 1; }
+    /* FAQ Accordion */
+    .faq-item {
+      background: white;
+      border-radius: var(--radius);
       margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: all 0.4s;
     }
-    .preco-card .valor {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--primary);
+    .faq-question {
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: background 0.3s;
+    }
+    .faq-question:hover { background: var(--surface-light); }
+    .faq-answer {
+      padding: 0 32px 28px;
+      color: var(--text-light);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease, padding 0.4s;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding: 0 32px 28px;
     }
     /* Chat */
     .chat-window {
-      height: 520px;
+      height: 540px;
       border-radius: var(--radius);
       border: 1px solid var(--border);
       background: white;
@@ -174,202 +260,144 @@
     }
     .chat-header {
       padding: 20px 24px;
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
       color: white;
       font-weight: 600;
-      font-size: 1.1rem;
-    }
-    .chat-messages {
-      flex: 1;
-      padding: 24px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+      font-size: 1.15rem;
     }
     .msg {
-      max-width: 80%;
+      max-width: 82%;
       padding: 14px 20px;
       border-radius: 20px;
-      font-size: 1rem;
+      animation: fadeUp 0.6s ease-out;
     }
-    .msg.bot {
-      background: #F1F5F9;
-      align-self: flex-start;
-      border-bottom-left-radius: 6px;
+    .msg.bot { background: #f1f5f9; align-self: flex-start; }
+    .msg.user { background: var(--accent); color: white; align-self: flex-end; }
+    /* Responsividade */
+    @media (max-width: 1024px) {
+      .hero h1 { font-size: 3.8rem; }
+      .hero p { font-size: 1.3rem; }
     }
-    .msg.user {
-      background: var(--accent);
-      color: white;
-      align-self: flex-end;
-      border-bottom-right-radius: 6px;
-    }
-    .chat-input {
-      padding: 16px 24px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      gap: 12px;
-      background: #F9FAFB;
-    }
-    .chat-input input {
-      flex: 1;
-      padding: 14px 20px;
-      border-radius: 9999px;
-      border: 1px solid var(--border);
-      background: white;
-    }
-    /* Form */
-    input, select, textarea {
-      width: 100%;
-      padding: 16px 20px;
-      margin-bottom: 20px;
-      border-radius: 16px;
-      border: 1px solid #CBD5E1;
-      background: white;
-      font-size: 1rem;
-    }
-    footer {
-      background: var(--primary);
-      color: white;
-      padding: 80px 0 40px;
-      text-align: center;
-    }
-    @media (max-width: 968px) {
-      .nav-links { display: none; }
+    @media (max-width: 768px) {
+      .hero { padding: 140px 0 100px; }
       .hero h1 { font-size: 3rem; }
-      .chat-window { height: 450px; }
+      .hero p { font-size: 1.2rem; }
+      .nav-inner { padding: 0 16px; }
+      .section { padding: 80px 0; }
+      .chat-window { height: 420px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Neve caindo -->
+  <!-- Partículas animadas -->
   <script>
-    function createSnow() {
-      for (let i = 0; i < 60; i++) {
-        let flake = document.createElement('div');
-        flake.className = 'snowflake';
-        flake.innerHTML = '❄';
-        flake.style.left = Math.random() * 100 + 'vw';
-        flake.style.animationDuration = (Math.random() * 15 + 15) + 's'; // 15-30s lento
-        flake.style.fontSize = (Math.random() * 1 + 0.6) + 'rem';
-        document.body.appendChild(flake);
+    function createParticles() {
+      const count = 80;
+      for (let i = 0; i < count; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.innerHTML = Math.random() > 0.6 ? '❄' : '🍀';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = (Math.random() * 25 + 15) + 's';
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        particle.style.opacity = Math.random() * 0.4 + 0.2;
+        particle.style.fontSize = (Math.random() * 1.4 + 0.8) + 'rem';
+        document.body.appendChild(particle);
       }
     }
-    window.onload = createSnow;
+    createParticles();
   </script>
 
   <!-- Navbar -->
   <nav>
-    <div class="container nav-inner">
-      <div class="logo">
-        <div class="logo-symbol">H</div>
-        Hunter 🍀
-      </div>
+    <div class="nav-inner">
+      <img src="https://cdn.discordapp.com/attachments/1469446605764558991/1474826684728475730/11a468b0-d1a4-4fe3-89f6-72fbb4009c99.png?ex=699b42e2&is=6999f162&hm=5a8d3fcf18b6f04c63cbdb8988dfcf74b3711cec73a92736c63926379be256a9&" alt="Hunter Logo" class="logo-img">
       <div class="nav-links">
         <a href="#inicio">Início</a>
-        <a href="#precos">Preços</a>
-        <a href="#porque">Por quê nós?</a>
-        <a href="#contato">Entrar</a>
+        <a href="#streamings">Streamings</a>
+        <a href="#beneficios">Benefícios</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contato">Contato</a>
       </div>
-      <a href="https://discord.gg/SBA4AAnugS" target="_blank" class="nav-cta">Entrar no Discord</a>
+      <a href="https://discord.gg/cHHG85tuDZ" target="_blank" class="nav-cta">Entrar no Discord 🍀</a>
+      <i class="fas fa-bars menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')"></i>
     </div>
   </nav>
 
   <!-- Hero -->
   <section id="inicio" class="hero">
-    <div class="container">
-      <h1>Ei Lucas, cansado de pagar caro por streamings?</h1>
-      <p>Na Hunter Fornecimentos a gente entrega HBO, Disney, Crunchyroll e muito mais por preços que cabem no bolso, com segurança total e uma comunidade de verdade no Discord. Tudo organizado, rápido e com staff que se importa.</p>
-      <a href="https://discord.gg/SBA4AAnugS" target="_blank" class="btn btn-primary">Quero entrar agora 🍀</a>
+    <div class="hero-content">
+      <h1>Streamings Premium<br>por Preços Imbatíveis</h1>
+      <p>Comunidade segura e organizada no Discord. HBO, Disney+, Netflix, Crunchyroll e muito mais — tudo com entrega rápida e suporte dedicado.</p>
+      <a href="https://discord.gg/cHHG85tuDZ" target="_blank" class="btn btn-primary">Juntar-se Agora</a>
     </div>
   </section>
 
-  <!-- Preços -->
-  <section id="precos" class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Nossos Streamings Mais Baratos</h2>
+  <!-- Streamings -->
+  <section id="streamings" class="section">
+    <div class="container" style="max-width:1280px; margin:0 auto; padding:0 24px;">
+      <h2 style="text-align:center; font-size:3.2rem; margin-bottom:60px;">Nossos Principais Streamings</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:32px;">
+        <div class="card reveal"><h3>HBO Max</h3><p style="margin:20px 0;color:var(--text-light);">Tela: R$ 0,40<br>Anual: R$ 1,25<br>FA: R$ 2,65</p></div>
+        <div class="card reveal"><h3>Disney+</h3><p style="margin:20px 0;color:var(--text-light);">Tela: R$ 0,55<br>Anual: R$ 0,95<br>FA: R$ 2,89</p></div>
+        <div class="card reveal"><h3>Crunchyroll</h3><p style="margin:20px 0;color:var(--text-light);">Tela: R$ 0,10<br>Anual: R$ 0,25<br>FA: R$ 0,89</p></div>
+        <div class="card reveal"><h3>Netflix</h3><p style="margin:20px 0;color:var(--text-light);">Tela: R$ 0,50<br>Anual: R$ 1,50<br>FA: R$ 3,00</p></div>
+        <div class="card reveal" style="grid-column:span 2; text-align:center;"><h3>+ Paramount+, Prime Video, Globoplay e vários outros</h3><p style="margin:20px 0;color:var(--accent);font-size:1.3rem;font-weight:600;">Tabela completa no Discord</p></div>
       </div>
-      <div class="precos-grid">
-        <div class="card preco-card">
-          <h3>HBO Max</h3>
-          <p class="valor">Tela: R$ 0,40</p>
-          <p class="valor">Anual: R$ 1,25</p>
-          <p class="valor">FA: R$ 2,65</p>
-        </div>
-        <div class="card preco-card">
-          <h3>Disney+</h3>
-          <p class="valor">Tela: R$ 0,55</p>
-          <p class="valor">Anual: R$ 0,95</p>
-          <p class="valor">FA: R$ 2,89</p>
-        </div>
-        <div class="card preco-card">
-          <h3>Crunchyroll</h3>
-          <p class="valor">Tela: R$ 0,10</p>
-          <p class="valor">Anual: R$ 0,25</p>
-          <p class="valor">FA: R$ 0,89</p>
-        </div>
-      </div>
-      <p style="text-align:center; margin-top:50px; font-size:1.4rem; color:var(--accent);">
-        <strong>E tem muito mais!</strong> Netflix, Prime, Paramount, Globoplay... Pergunta no Discord que a gente atualiza na hora.
-      </p>
     </div>
   </section>
 
-  <!-- Por quê nós -->
-  <section id="porque" class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Por que entrar na Hunter Fornecimentos?</h2>
+  <!-- Benefícios -->
+  <section id="beneficios" class="section" style="background:var(--surface-light);">
+    <div class="container" style="max-width:1280px; margin:0 auto; padding:0 24px;">
+      <h2 style="text-align:center; font-size:3.2rem; margin-bottom:60px;">Por que escolher a Hunter?</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:32px;">
+        <div class="card reveal"><h3><i class="fas fa-shield-alt"></i> 100% Seguro</h3><p style="margin:20px 0;color:var(--text-light);">Negociações protegidas e staff ativa 24/7</p></div>
+        <div class="card reveal"><h3><i class="fas fa-tag"></i> Preços Imbatíveis</h3><p style="margin:20px 0;color:var(--text-light);">Os menores valores do mercado com qualidade garantida</p></div>
+        <div class="card reveal"><h3><i class="fas fa-users"></i> Comunidade Ativa</h3><p style="margin:20px 0;color:var(--text-light);">Membros reais, dicas diárias e ambiente acolhedor</p></div>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 32px;">
-        <div class="card">
-          <h3>Preços que você não encontra em lugar nenhum</h3>
-          <p style="margin-top: 16px; color: var(--text-light);">Streamings baratinhos sem dor de cabeça nem risco.</p>
-        </div>
-        <div class="card">
-          <h3>Comunidade viva e acolhedora</h3>
-          <p style="margin-top: 16px; color: var(--text-light);">Gente real trocando ideia, dica de série e fazendo negócio tranquilo.</p>
-        </div>
-        <div class="card">
-          <h3>Segurança e suporte de verdade</h3>
-          <p style="margin-top: 16px; color: var(--text-light);">Staff sempre online, negociações protegidas e zero calote.</p>
-        </div>
-      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="container" style="max-width:900px; margin:0 auto; padding:0 24px;">
+      <h2 style="text-align:center; font-size:3.2rem; margin-bottom:50px;">Perguntas Frequentes</h2>
+      <div class="faq-item reveal"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">Como entro na comunidade?<i class="fas fa-chevron-down" style="transition:0.4s;"></i></div><div class="faq-answer">Clique no botão "Entrar no Discord" acima. É instantâneo e gratuito.</div></div>
+      <div class="faq-item reveal"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">Os acessos são confiáveis e legais?<i class="fas fa-chevron-down" style="transition:0.4s;"></i></div><div class="faq-answer">Sim. Utilizamos métodos compartilhados seguros e dentro das políticas permitidas.</div></div>
+      <div class="faq-item reveal"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">Posso revender os produtos?<i class="fas fa-chevron-down" style="transition:0.4s;"></i></div><div class="faq-answer">Sim, a comunidade é aberta para compradores e vendedores confiáveis, respeitando as regras.</div></div>
+      <div class="faq-item reveal"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">E se eu tiver problema com entrega?<i class="fas fa-chevron-down" style="transition:0.4s;"></i></div><div class="faq-answer">Abra um ticket no Discord. Nossa equipe resolve em minutos com garantia total.</div></div>
     </div>
   </section>
 
   <!-- Contato + Chat -->
-  <section id="contato" class="section">
-    <div class="container">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px;">
-        <!-- Formulário -->
-        <div>
-          <h2>Bora conversar no WhatsApp?</h2>
-          <p style="color: var(--text-light); margin: 16px 0 40px;">Me fala rapidinho o que você precisa (compra, venda, dúvida...). Te respondo em minutos.</p>
-         
-          <form id="formContato">
+  <section id="contato" class="section" style="background:var(--surface-light);">
+    <div class="container" style="max-width:1280px; margin:0 auto; padding:0 24px;">
+      <h2 style="text-align:center; font-size:3.2rem; margin-bottom:60px;">Fale Conosco ou Tire Dúvidas</h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px;" class="form-chat-grid">
+        <div class="reveal">
+          <form id="formHunter">
             <input name="nome" placeholder="Seu nome" required>
             <input name="whatsapp" placeholder="WhatsApp (com DDD)" required>
-            <select name="interesse">
-              <option>Quero comprar streamings</option>
-              <option>Quero vender / fornecer</option>
-              <option>Dúvida sobre preços ou entrega</option>
-              <option>Outro (me explica)</option>
+            <select name="tipo">
+              <option>HBO Max</option>
+              <option>Disney+</option>
+              <option>Crunchyroll</option>
+              <option>Netflix</option>
+              <option>Outro</option>
             </select>
-            <textarea name="mensagem" rows="5" placeholder="Me conta mais: quais streamings você quer? Algum problema?..." required></textarea>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar e falar comigo</button>
+            <textarea name="descricao" rows="5" placeholder="Descreva o que precisa..." required></textarea>
+            <button type="submit" class="btn btn-primary" style="width:100%;">Enviar Mensagem</button>
           </form>
         </div>
-        <!-- Chat simples -->
-        <div>
+        <div class="reveal">
           <div class="chat-window">
-            <div class="chat-header">Oi, sou o Hunter Bot 🍀 Como posso te ajudar hoje?</div>
-            <div id="chat" class="chat-messages"></div>
-            <div class="chat-input">
-              <input id="in" type="text" placeholder="Digite sua dúvida ou pedido...">
-              <button id="send" class="btn btn-primary" style="padding: 0 32px;">Enviar</button>
+            <div class="chat-header">Hunter Bot 🍀 — Como posso ajudar?</div>
+            <div id="chat" class="chat-messages" style="padding:24px; flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:16px;"></div>
+            <div style="padding:16px 24px; border-top:1px solid var(--border); display:flex; gap:12px; background:#f9fafb;">
+              <input id="in" type="text" placeholder="Digite sua mensagem..." style="flex:1; padding:14px 20px; border-radius:9999px; border:1px solid var(--border);">
+              <button id="send" class="btn btn-primary" style="padding:0 32px;">Enviar</button>
             </div>
           </div>
         </div>
@@ -378,15 +406,26 @@
   </section>
 
   <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p style="font-size: 1.1rem; margin-bottom: 16px;">Feito com carinho para a galera de Campinas e Brasil todo 🍀</p>
-      <p style="opacity: 0.8;">© 2026 Hunter Fornecimentos — Confiança em primeiro lugar.</p>
+  <footer style="background:var(--primary); color:white; padding:80px 0 40px; text-align:center;">
+    <div style="max-width:1280px; margin:0 auto; padding:0 24px;">
+      <p style="font-size:1.2rem; margin-bottom:20px;">Hunter Fornecimentos 🍀 — Economia e qualidade em um só lugar</p>
+      <a href="https://discord.gg/cHHG85tuDZ" target="_blank" style="color:white; font-size:2rem; margin:0 12px; transition:0.3s;" onmouseover="this.style.color='#00FF41'" onmouseout="this.style.color='white'"><i class="fab fa-discord"></i></a>
+      <p style="margin-top:30px; opacity:0.7;">© 2026 Hunter Fornecimentos. Todos os direitos reservados.</p>
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script>
-    // Chat Bot simples
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Chat
     const chat = document.getElementById('chat');
     function addMsg(text, type) {
       const div = document.createElement('div');
@@ -395,51 +434,29 @@
       chat.appendChild(div);
       chat.scrollTop = chat.scrollHeight;
     }
-    function botReply(text) {
-      setTimeout(() => addMsg(text, 'bot'), 800);
-    }
+    function botReply(text) { setTimeout(() => addMsg(text, 'bot'), 700 + Math.random()*600); }
     function handleChat(msg) {
       msg = msg.toLowerCase().trim();
       addMsg(msg, 'user');
-      if (msg.includes('oi') || msg.includes('olá') || msg.includes('e aí')) {
-        botReply('E aí Lucas! Tudo certo? 😄 Me fala o que tá precisando hoje na Hunter!');
-      } else if (msg.includes('preço') || msg.includes('quanto') || msg.includes('valor')) {
-        botReply('Temos HBO tela a R$0,40, Disney anual R$0,95, Crunchy R$0,10 tela... E muito mais! Qual você quer? Te passo a lista completa no Discord ou aqui mesmo.');
-      } else if (msg.includes('entrar') || msg.includes('discord') || msg.includes('link')) {
-        botReply('Bora! Link direto: https://discord.gg/SBA4AAnugS — entra que a galera tá esperando você 🍀');
-      } else if (msg.includes('comprar') || msg.includes('vender')) {
-        botReply('Perfeito! Me fala qual streaming e quantas telas você quer (ou se vai fornecer). A gente organiza tudo seguro no servidor.');
-      } else {
-        botReply('Entendi! Me dá mais um detalhe que eu te ajudo melhor. Ou clica no Discord ali em cima que é mais rápido 😉');
-      }
+      if (/oi|olá|bom dia|boa tarde/.test(msg)) botReply('Oi! Tudo bem? 😄 Como posso te ajudar com streamings hoje?');
+      else if (/preço|valor|quanto/.test(msg)) botReply('Temos preços a partir de R$ 0,10! Me diz qual streaming que te passo a tabela completa.');
+      else if (/discord|entrar|comunidade/.test(msg)) botReply('Perfeito! Link direto: https://discord.gg/cHHG85tuDZ — lá tem tudo atualizado e promoções exclusivas.');
+      else if (/problema|suporte|ajuda/.test(msg)) botReply('Qualquer problema é só abrir ticket no Discord. A staff resolve rapidinho com garantia total.');
+      else botReply('Me conta mais detalhes que eu te ajudo na hora! Pode mandar print, dúvida ou pedido específico 😉');
     }
-    document.getElementById('send').addEventListener('click', () => {
+    document.getElementById('send').onclick = () => {
       const input = document.getElementById('in');
-      if (input.value.trim()) {
-        handleChat(input.value);
-        input.value = '';
-      }
-    });
-    document.getElementById('in').addEventListener('keypress', e => {
-      if (e.key === 'Enter') document.getElementById('send').click();
-    });
-    // Saudação inicial
-    setTimeout(() => addMsg('Oi Lucas! Tudo bem aí em Campinas? 🍀 Sou o bot da Hunter. Quer ver preços, entrar no Discord ou falar de negócio?', 'bot'), 1200);
+      if (input.value.trim()) { handleChat(input.value); input.value = ''; }
+    };
+    document.getElementById('in').onkeypress = e => { if (e.key === 'Enter') document.getElementById('send').click(); };
+    setTimeout(() => addMsg('Oi! Bem-vindo à Hunter 🍀. Qual streaming você está procurando hoje?', 'bot'), 1200);
 
-    // Form → WhatsApp (substitua o número)
-    document.getElementById('formContato').addEventListener('submit', e => {
+    // Form → Alert de envio (sem WhatsApp)
+    document.getElementById('formHunter').onsubmit = e => {
       e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = Object.fromEntries(formData);
-      const text = `*Novo contato Hunter*%0A` +
-                   `Nome: ${data.nome}%0A` +
-                   `WhatsApp: ${data.whatsapp}%0A` +
-                   `Interesse: ${data.interesse}%0A` +
-                   `Mensagem: ${data.mensagem}`;
-      window.open(`https://wa.me/55SEUNUMEROAQUI?text=${text}`, '_blank'); // ← Coloque seu número real aqui
-      alert('Enviado! Redirecionando pro WhatsApp...');
+      alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
       e.target.reset();
-    });
+    };
   </script>
 </body>
 </html>

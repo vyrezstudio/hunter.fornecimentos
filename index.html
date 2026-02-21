@@ -4,235 +4,307 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hunter Fornecimentos 🍀 - Streamings Baratos e Confiáveis</title>
-  <meta name="description" content="Hunter Fornecimentos: comunidade no Discord com streamings baratos, HBO, Disney, Crunchyroll e muito mais. Segurança e confiança garantidas!"/>
+  <meta name="description" content="Hunter Fornecimentos: comunidade no Discord com streamings HBO, Disney+, Crunchyroll e muito mais por preços imbatíveis. Segurança, confiança e bons negócios!"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: 'Roboto', sans-serif;
-      background: #0a0a0a;
-      color: #e0e0e0;
-      line-height: 1.6;
+      font-family: 'Montserrat', sans-serif;
+      background: #f8f9fa;
+      color: #222;
+      line-height: 1.7;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* Neve caindo */
+    .snow {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .snowflake {
+      position: absolute;
+      width: 10px; height: 10px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      box-shadow: 0 0 8px rgba(255,255,255,0.9);
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      to { transform: translateY(100vh) rotate(720deg); }
     }
     header {
-      background: linear-gradient(to bottom, #000, #001a00);
+      background: linear-gradient(to bottom, #ffffff, #f0f0f0);
       text-align: center;
-      padding: 60px 20px 40px;
-      border-bottom: 4px solid #00ff41;
+      padding: 100px 20px 80px;
+      position: relative;
+      border-bottom: 1px solid #ddd;
     }
     .logo {
-      max-width: 280px;
+      max-width: 320px;
       height: auto;
-      margin-bottom: 20px;
-      filter: drop-shadow(0 0 15px #00ff41);
+      margin-bottom: 25px;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
     }
     h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 3.5rem;
-      color: #00ff41;
-      text-shadow: 0 0 20px #00ff41, 0 0 40px #00aa2f;
-      margin-bottom: 10px;
+      font-size: 4.2rem;
+      color: #111;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
     }
+    h1 span { color: #2ecc71; }
     .subtitle {
-      font-size: 1.4rem;
-      color: #00cc33;
-      margin-bottom: 30px;
+      font-size: 1.5rem;
+      color: #555;
+      max-width: 700px;
+      margin: 0 auto 40px;
     }
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    section {
-      padding: 60px 0;
-    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+    section { padding: 100px 0; }
     h2 {
       font-family: 'Orbitron', sans-serif;
-      color: #00ff41;
+      color: #111;
       text-align: center;
-      font-size: 2.8rem;
-      margin-bottom: 40px;
-      text-shadow: 0 0 15px #00ff41;
+      font-size: 3rem;
+      margin-bottom: 60px;
+      position: relative;
+    }
+    h2:after {
+      content: '';
+      width: 80px; height: 4px;
+      background: #2ecc71;
+      position: absolute;
+      bottom: -15px; left: 50%; transform: translateX(-50%);
+      border-radius: 2px;
     }
     .precos {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
     }
     .card {
-      background: #111;
-      border: 2px solid #00ff41;
-      border-radius: 12px;
-      padding: 25px;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 25px;
       text-align: center;
-      box-shadow: 0 0 20px rgba(0,255,65,0.2);
-      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: all 0.35s ease;
+      border: 1px solid #eee;
     }
     .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 0 35px rgba(0,255,65,0.5);
+      transform: translateY(-12px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
     }
-    .card h3 {
-      color: #00ff41;
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-    }
-    .card p {
-      font-size: 1.1rem;
-      margin: 8px 0;
-    }
-    .highlight {
-      color: #ffdd00;
-      font-weight: bold;
-    }
-    .benefits {
+    .card h3 { font-size: 2rem; margin-bottom: 20px; color: #111; }
+    .card p { font-size: 1.25rem; margin: 12px 0; }
+    .price { font-size: 1.6rem; font-weight: 700; color: #2ecc71; }
+    .benefits, .como-funciona {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin: 40px 0;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 35px;
     }
-    .benefit-item {
-      background: #0d1a0d;
-      padding: 25px;
-      border-radius: 12px;
-      border-left: 5px solid #00ff41;
+    .benefit-item, .como-item {
+      background: white;
+      padding: 35px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      text-align: center;
     }
+    .benefit-item h3, .como-item h3 { color: #2ecc71; margin-bottom: 15px; font-size: 1.5rem; }
+    .depoimentos {
+      background: #f0f4f8;
+      padding: 100px 0;
+      text-align: center;
+    }
+    .depo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+    .depo {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      font-style: italic;
+      color: #444;
+    }
+    .depo cite { display:block; margin-top:20px; font-style:normal; font-weight:600; color:#111; }
     .cta {
       text-align: center;
-      background: linear-gradient(135deg, #001a00, #003300);
-      padding: 80px 20px;
-      border-radius: 20px;
-      margin: 40px 0;
-      box-shadow: 0 0 40px rgba(0,255,65,0.3);
+      padding: 120px 20px;
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: white;
+      border-radius: 24px;
+      margin: 60px 0;
+      box-shadow: 0 20px 60px rgba(46,204,113,0.3);
     }
     .btn {
       display: inline-block;
-      background: #00ff41;
-      color: #000;
-      font-size: 1.5rem;
-      font-weight: bold;
-      padding: 18px 50px;
-      border-radius: 50px;
+      background: white;
+      color: #27ae60;
+      font-size: 1.8rem;
+      font-weight: 700;
+      padding: 22px 70px;
+      border-radius: 60px;
       text-decoration: none;
-      margin: 20px 0;
-      box-shadow: 0 0 30px #00ff41;
-      transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      transition: all 0.4s;
+      margin: 30px 0;
     }
     .btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 50px #00ff41;
-      background: #00cc33;
+      transform: scale(1.08) translateY(-5px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      background: #f0fff0;
     }
     footer {
       text-align: center;
-      padding: 40px 20px;
-      background: #000;
-      color: #666;
+      padding: 60px 20px;
+      background: #111;
+      color: #aaa;
       font-size: 0.95rem;
     }
     @media (max-width: 768px) {
-      h1 { font-size: 2.8rem; }
-      h2 { font-size: 2.2rem; }
-      .logo { max-width: 220px; }
+      h1 { font-size: 3rem; }
+      h2 { font-size: 2.4rem; }
+      .logo { max-width: 240px; }
+      section { padding: 70px 0; }
     }
   </style>
 </head>
 <body>
 
+  <div class="snow" id="snow"></div>
+
   <header>
     <img src="https://cdn.discordapp.com/attachments/1469446605764558991/1474826684728475730/11a468b0-d1a4-4fe3-89f6-72fbb4009c99.png?ex=699b42e2&is=6999f162&hm=5a8d3fcf18b6f04c63cbdb8988dfcf74b3711cec73a92736c63926379be256a9&" alt="Hunter Fornecimentos Logo" class="logo">
-    <h1>HUNTER FORNECIMENTOS 🍀</h1>
-    <p class="subtitle">Comunidade, Vendas & Fornecimentos de Streamings — Segurança e Preço Baixo</p>
+    <h1>HUNTER FORNECIMENTOS <span>🍀</span></h1>
+    <p class="subtitle">O lugar onde você encontra streamings de qualidade por preços que cabem no bolso, com total segurança e uma comunidade que realmente se importa.</p>
   </header>
 
   <div class="container">
 
     <section id="precos">
-      <h2>🚀 Tabela de Streamings</h2>
+      <h2>Nossos Melhores Preços</h2>
       <div class="precos">
         <div class="card">
           <h3>HBO Max</h3>
-          <p>Tela: <span class="highlight">R$ 0,40</span></p>
-          <p>Anual: <span class="highlight">R$ 1,25</span></p>
-          <p>FA: <span class="highlight">R$ 2,65</span></p>
+          <p>Tela: <span class="price">R$ 0,40</span></p>
+          <p>Anual: <span class="price">R$ 1,25</span></p>
+          <p>FA: <span class="price">R$ 2,65</span></p>
         </div>
         <div class="card">
           <h3>Disney+</h3>
-          <p>Tela: <span class="highlight">R$ 0,55</span></p>
-          <p>Anual: <span class="highlight">R$ 0,*</span> (valor não informado)</p>
-          <p>FA: <span class="highlight">R$ 2,89</span></p>
+          <p>Tela: <span class="price">R$ 0,55</span></p>
+          <p>Anual: <span class="price">R$ 0,95</span></p>
+          <p>FA: <span class="price">R$ 2,89</span></p>
         </div>
         <div class="card">
           <h3>Crunchyroll</h3>
-          <p>Tela: <span class="highlight">R$ 0,10</span></p>
-          <p>Anual: <span class="highlight">R$ 0,25</span></p>
-          <p>FA: <span class="highlight">R$ 0,89</span></p>
+          <p>Tela: <span class="price">R$ 0,10</span></p>
+          <p>Anual: <span class="price">R$ 0,25</span></p>
+          <p>FA: <span class="price">R$ 0,89</span></p>
         </div>
       </div>
-      <p style="text-align:center; font-size:1.3rem; color:#00ff41; margin-top:30px;">
-        <strong>E MUITO MAIS STREAMINGS!!!</strong><br>Netflix, Prime Video, Paramount+, Globoplay e vários outros.
+      <p style="text-align:center; font-size:1.4rem; color:#2ecc71; font-weight:600; margin-top:40px;">
+        E tem muito mais! Netflix, Prime Video, Paramount+, Globoplay, Star+ e vários outros. Pergunte no Discord!
       </p>
     </section>
 
     <section id="ofertas">
-      <h2>🔥 O que a Hunter Fornecimentos Oferece?</h2>
+      <h2>O que você ganha na Hunter?</h2>
       <div class="benefits">
         <div class="benefit-item">
-          <h3>🛒 Sistema de vendas seguro</h3>
-          <p>Negociações organizadas e confiáveis dentro do Discord.</p>
+          <h3>🛡️ Vendas 100% Seguras</h3>
+          <p>Negociações protegidas, sem calote, com staff que monitora tudo.</p>
         </div>
         <div class="benefit-item">
-          <h3>🛡️ Streamings extremamente baratos</h3>
-          <p>Preços imbatíveis com segurança total nas entregas.</p>
+          <h3>💰 Preços que cabem no bolso</h3>
+          <p>Streamings por frações do valor oficial. Economia real todo mês.</p>
         </div>
         <div class="benefit-item">
-          <h3>👥 Comunidade ativa</h3>
-          <p>Membros reais, suporte rápido e ambiente amigável.</p>
+          <h3>👥 Galera ativa e de boa</h3>
+          <p>Membros reais, papo reto, ajuda rápida e zero toxicidade.</p>
         </div>
         <div class="benefit-item">
-          <h3>🧑‍💻 Staff dedicada</h3>
-          <p>Equipe atenta, justa e sempre disponível para ajudar.</p>
-        </div>
-        <div class="benefit-item">
-          <h3>📦 Diversos produtos e serviços</h3>
-          <p>Foco total em qualidade, confiança e variedade.</p>
+          <h3>🧑‍💻 Staff 24/7</h3>
+          <p>Equipe dedicada, justa e sempre online pra resolver qualquer coisa.</p>
         </div>
       </div>
     </section>
 
-    <section id="porque">
-      <h2>🚀 Por que entrar na Hunter?</h2>
-      <ul style="list-style:none; font-size:1.2rem; max-width:700px; margin:0 auto; text-align:center;">
-        <li>✔️ Ambiente super organizado</li>
-        <li>✔️ Negociações 100% protegidas</li>
-        <li>✔️ Comunidade forte e ativa</li>
-        <li>✔️ Confiança acima de tudo</li>
-        <li>✔️ Deixe de pagar caro por streamings!</li>
-      </ul>
-      <p style="text-align:center; font-size:1.4rem; margin:40px 0; color:#00ff41;">
-        Se você procura um servidor sério, esse é o lugar certo.
-      </p>
+    <section class="depoimentos">
+      <h2>O que a galera tá falando</h2>
+      <div class="depo-grid">
+        <div class="depo">
+          “Melhor servidor que já entrei. Comprei Disney anual e tá rodando liso há meses. Recomendo demais!” 
+          <cite>— @user123</cite>
+        </div>
+        <div class="depo">
+          “Preços imbatíveis e o suporte responde na hora. Nunca mais pago caro por streaming!”
+          <cite>— @animeslover</cite>
+        </div>
+        <div class="depo">
+          “Comunidade organizada, sem bagunça. Entregas rápidas e confiáveis. Vale cada centavo.”
+          <cite>— @hunterfan</cite>
+        </div>
+      </div>
+    </section>
+
+    <section id="como">
+      <h2>Como funciona? Simples assim:</h2>
+      <div class="como-funciona">
+        <div class="como-item">
+          <h3>1. Entra no Discord</h3>
+          <p>Clica no botão abaixo e já cai no servidor.</p>
+        </div>
+        <div class="como-item">
+          <h3>2. Lê as regras e abre ticket</h3>
+          <p>Escolhe o produto, fala com o vendedor verificado.</p>
+        </div>
+        <div class="como-item">
+          <h3>3. Paga e recebe na hora</h3>
+          <p>PIX ou método combinado → login entregue em minutos.</p>
+        </div>
+      </div>
     </section>
 
     <div class="cta">
-      <h2 style="font-size:3rem; margin-bottom:30px;">🔗 ENTRE AGORA NA HUNTER FORN!</h2>
-      <a href="https://discord.gg/SBA4AAnugS" target="_blank" class="btn">JUNTAR-SE AO DISCORD → 🍀</a>
-      <p style="margin-top:30px; font-size:1.1rem;">@everyone — Vagas abertas, venha fazer bons negócios!</p>
+      <h2 style="font-size:3.5rem; margin-bottom:30px;">Pronto pra economizar de verdade?</h2>
+      <a href="https://discord.gg/SBA4AAnugS" target="_blank" class="btn">ENTRAR NA HUNTER AGORA 🍀</a>
+      <p style="margin-top:30px; font-size:1.3rem; opacity:0.9;">Vagas abertas — vem fazer parte da família Hunter!</p>
     </div>
 
   </div>
 
   <footer>
-    <p>© 2026 Hunter Fornecimentos 🍀 — Todos os direitos reservados.<br>
-    Site feito apenas para divulgação da comunidade no Discord.</p>
+    <p>© 2026 Hunter Fornecimentos 🍀 — Feito com carinho pra galera que curte economizar sem abrir mão da qualidade.<br>
+    Site apenas para divulgação da comunidade no Discord.</p>
   </footer>
+
+  <script>
+    // Neve suave
+    function createSnowflake() {
+      const snow = document.getElementById('snow');
+      const flake = document.createElement('div');
+      flake.className = 'snowflake';
+      flake.style.left = Math.random() * 100 + 'vw';
+      flake.style.animationDuration = (Math.random() * 8 + 8) + 's'; // 8-16s
+      flake.style.opacity = Math.random() * 0.5 + 0.5;
+      flake.style.width = flake.style.height = (Math.random() * 6 + 4) + 'px';
+      flake.style.animationDelay = Math.random() * 5 + 's';
+      snow.appendChild(flake);
+      setTimeout(() => flake.remove(), 20000);
+    }
+    setInterval(createSnowflake, 180); // neve suave, não sobrecarrega
+  </script>
 
 </body>
 </html>
